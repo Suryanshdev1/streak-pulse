@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StreakPulse — Daily Habit & Task Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+  <!-- Auth Screen (Shown when logged out) -->
+  <section id="auth-screen" class="auth-screen">
+    <div class="auth-card">
+      <div class="brand-logo">⚡ StreakPulse</div>
+      <p class="auth-subtitle">Track daily tasks from May 2021 onwards with live cloud sync and individual streaks.</p>
+      <button id="google-login-btn" class="btn btn-primary btn-full">
+        Continue with Google
+      </button>
+    </div>
+  </section>
+
+  <!-- Main App Shell (Shown when logged in) -->
+  <div id="app-shell" class="app-shell hidden">
+    <header class="app-header">
+      <div class="header-left">
+        <span class="brand-logo">⚡ StreakPulse</span>
+      </div>
+      <div class="header-right">
+        <button id="open-add-modal-btn" class="btn btn-primary">+ Add Task</button>
+        <div class="user-menu">
+          <img id="user-avatar" class="user-avatar" src="" alt="User" />
+          <button id="logout-btn" class="btn btn-ghost btn-sm">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-container">
+      <!-- Date Navigation Bar -->
+      <section class="date-bar">
+        <button id="prev-day-btn" class="btn btn-ghost" title="Previous Day">← Prev</button>
+        <div class="date-picker-wrap">
+          <input type="date" id="date-picker" min="2021-05-01" />
+          <span id="date-display-label" class="date-label"></span>
+        </div>
+        <div class="date-actions">
+          <button id="today-btn" class="btn btn-ghost btn-sm">Today</button>
+          <button id="next-day-btn" class="btn btn-ghost" title="Next Day">Next →</button>
+        </div>
+      </section>
+
+      <!-- Stats Overview -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-label">Completed</span>
+          <strong id="stat-completed" class="stat-value">0 / 0</strong>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Completion Rate</span>
+          <strong id="stat-rate" class="stat-value">0%</strong>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Top Active Streak</span>
+          <strong id="stat-top-streak" class="stat-value">🔥 0d</strong>
+        </div>
+      </section>
+
+      <!-- Task List -->
+      <section class="tasks-section">
+        <div id="loading-indicator" class="loading-state hidden">Syncing tasks...</div>
+        <div id="task-list" class="task-list"></div>
+        <div id="empty-state" class="empty-state hidden">
+          <p>No tasks yet. Click <strong>+ Add Task</strong> to start building your streaks!</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Add / Edit Task Modal -->
+  <div id="task-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="modal-title">Add New Task</h2>
+        <button id="close-modal-btn" class="btn btn-icon">✕</button>
+      </div>
+      <form id="task-form">
+        <input type="hidden" id="task-id-input" />
+        <div class="form-group">
+          <label for="task-title-input">Task Name</label>
+          <input type="text" id="task-title-input" placeholder="e.g., 30 mins Coding" required maxlength="80" />
+        </div>
+        <div class="form-group">
+          <label for="task-category-input">Category (Optional)</label>
+          <input type="text" id="task-category-input" placeholder="e.g., Health, Study, Work" maxlength="30" />
+        </div>
+        <div class="day-field">
+          <span class="field-label" id="days-label">Repeat on</span>
+          <div class="day-presets">
+            <button type="button" class="btn btn-sm btn-ghost" data-preset="all">Every day</button>
+            <button type="button" class="btn btn-sm btn-ghost" data-preset="weekdays">Weekdays</button>
+            <button type="button" class="btn btn-sm btn-ghost" data-preset="weekends">Weekends</button>
+          </div>
+          <div class="day-picker" id="day-picker" role="group" aria-labelledby="days-label">
+            <label class="day-chip"><input type="checkbox" name="days" value="1" checked /><span>Mon</span></label>
+            <label class="day-chip"><input type="checkbox" name="days" value="2" checked /><span>Tue</span></label>
+            <label class="day-chip"><input type="checkbox" name="days" value="3" checked /><span>Wed</span></label>
+            <label class="day-chip"><input type="checkbox" name="days" value="4" checked /><span>Thu</span></label>
+            <label class="day-chip"><input type="checkbox" name="days" value="5" checked /><span>Fri</span></label>
+            <label class="day-chip"><input type="checkbox" name="days" value="6" checked /><span>Sat</span></label>
+            <label class="day-chip"><input type="checkbox" name="days" value="0" checked /><span>Sun</span></label>
+          </div>
+          <p id="day-error" class="form-error hidden">Pick at least one day.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="cancel-modal-btn" class="btn btn-ghost">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

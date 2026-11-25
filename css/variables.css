@@ -1,0 +1,38 @@
+:root {
+  /* Type */
+  --font-sans: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* Shape */
+  --border-w: 3px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --transition: 0.15s ease;
+
+  /* Light theme */
+  --ink: #111111;                 /* borders + hard shadows */
+  --bg-page: #fffdf2;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #fff3a8;
+  --dot: #d9d4bd;
+  --border-color: var(--ink);
+  --text-primary: #111111;
+  --text-secondary: #4a4a4a;
+  --on-accent: #111111;           /* text on yellow / mint / coral */
+
+  --accent: #ffe600;              /* yellow */
+  --accent-hover: #ffd900;
+  --success: #62e8b8;             /* mint */
+  --danger: #ff6b57;              /* coral */
+  --done-bg: #d8fbec;
+  --streak-bg: #ff6b57;
+  --streak-text: #111111;
+  --focus: #2f5bff;
+
+  --shadow-sm: 3px 3px 0 var(--ink);
+  --shadow-md: 5px 5px 0 var(--ink);
+  --shadow-lg: 8px 8px 0 var(--ink);
+
+  color-scheme: light;
+}
