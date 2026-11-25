@@ -55,3 +55,10 @@ export function calculateStreak(completedDates = {}, referenceDateStr, days) {
 
   return { currentStreak, bestStreak, totalCompleted };
 }
+
+const GOALS = [3, 7, 14, 21, 30, 50, 75, 100, 150, 200, 365, 500, 730, 1000];
+
+// Next milestone the streak bar is filling towards
+export function getNextGoal(current) {
+  return GOALS.find((g) => g > current) ?? (Math.floor(current / 365) + 1) * 365;
+}

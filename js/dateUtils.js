@@ -74,3 +74,33 @@ export function formatDaysLabel(days) {
   if (set.size === 2 && set.has(0) && set.has(6)) return 'Weekends';
   return DAY_ORDER.filter((d) => set.has(d)).map((d) => DAY_NAMES[d]).join(', ');
 }
+
+// ---- Multi-date board helpers ----
+
+export const MONTH_NAMES = [
+  'JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE',
+  'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'
+];
+
+// "26 NOVEMBER 2026"
+export function formatDateHeading(dateStr) {
+  const d = parseDateStr(dateStr);
+  return `${d.getDate()} ${MONTH_NAMES[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+export function getRangeStart(today, daysBack) {
+  const start = shiftDate(today, -daysBack);
+  return start < APP_START_DATE ? APP_START_DATE : start;
+}
+
+// Every date from (today - daysBack) to (today + daysAhead), oldest first
+export function getDateRange(today, daysBack, daysAhead) {
+  const end = shiftDate(today, daysAhead);
+  const out = [];
+  let cursor = getRangeStart(today, daysBack);
+  while (cursor <= end) {
+    out.push(cursor);
+    cursor = shiftDate(cursor, 1);
+  }
+  return out;
+}

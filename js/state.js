@@ -1,18 +1,13 @@
-import { getTodayDateStr, clampDate } from './dateUtils.js';
-
 export const state = {
   user: null,
-  activeDate: getTodayDateStr(),
   tasks: [],
-  isLoading: false
+  isLoading: false,
+  daysBack: 2,   // past days shown above today
+  daysAhead: 6   // upcoming days shown below today
 };
 
 export function setUser(user) {
   state.user = user;
-}
-
-export function setActiveDate(dateStr) {
-  state.activeDate = clampDate(dateStr);
 }
 
 export function setTasks(tasks) {
@@ -21,6 +16,10 @@ export function setTasks(tasks) {
 
 export function setLoading(flag) {
   state.isLoading = flag;
+}
+
+export function showEarlierDays(count = 7) {
+  state.daysBack += count;
 }
 
 export function addTaskToState(task) {

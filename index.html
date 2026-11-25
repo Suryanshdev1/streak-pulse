@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ffe600" />
   <title>StreakPulse — Daily Habit & Task Tracker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -39,42 +40,38 @@
     </header>
 
     <main class="main-container">
-      <!-- Date Navigation Bar -->
-      <section class="date-bar">
-        <button id="prev-day-btn" class="btn btn-ghost" title="Previous Day">← Prev</button>
-        <div class="date-picker-wrap">
-          <input type="date" id="date-picker" min="2021-05-01" />
-          <span id="date-display-label" class="date-label"></span>
-        </div>
-        <div class="date-actions">
-          <button id="today-btn" class="btn btn-ghost btn-sm">Today</button>
-          <button id="next-day-btn" class="btn btn-ghost" title="Next Day">Next →</button>
-        </div>
-      </section>
-
-      <!-- Stats Overview -->
+      <!-- Today at a glance -->
       <section class="stats-grid">
         <div class="stat-card">
-          <span class="stat-label">Completed</span>
+          <span class="stat-label">Done Today</span>
           <strong id="stat-completed" class="stat-value">0 / 0</strong>
         </div>
         <div class="stat-card">
-          <span class="stat-label">Completion Rate</span>
+          <span class="stat-label">Today's Rate</span>
           <strong id="stat-rate" class="stat-value">0%</strong>
         </div>
         <div class="stat-card">
-          <span class="stat-label">Top Active Streak</span>
+          <span class="stat-label">Top Streak</span>
           <strong id="stat-top-streak" class="stat-value">🔥 0d</strong>
         </div>
       </section>
 
-      <!-- Task List -->
-      <section class="tasks-section">
-        <div id="loading-indicator" class="loading-state hidden">Syncing tasks...</div>
-        <div id="task-list" class="task-list"></div>
-        <div id="empty-state" class="empty-state hidden">
-          <p>No tasks yet. Click <strong>+ Add Task</strong> to start building your streaks!</p>
-        </div>
+      <div id="loading-indicator" class="loading-state hidden">Syncing tasks...</div>
+      <div id="empty-state" class="empty-state hidden">
+        <p>No tasks yet. Click <strong>+ Add Task</strong> to start building your streaks!</p>
+      </div>
+
+      <!-- Streaks: one bar per task -->
+      <section id="streak-section" class="board hidden">
+        <h2 class="section-title">Streaks</h2>
+        <div id="streak-list" class="streak-list"></div>
+      </section>
+
+      <!-- Every date, every task -->
+      <section id="dates-section" class="board hidden">
+        <h2 class="section-title">Daily checklist</h2>
+        <button id="load-earlier-btn" class="btn btn-ghost btn-sm">Load earlier days</button>
+        <div id="date-list" class="date-list"></div>
       </section>
     </main>
   </div>
